@@ -1,0 +1,1118 @@
+\documentclass{article}
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{wasysym}
+\usepackage{xspace}
+\usepackage{ wasysym }
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=LightGray}
+
+\declaretheoremstyle[name=Proposition,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{proposition}
+\tcolorboxenvironment{proposition}{colback=LightOrange}
+
+\declaretheoremstyle[name=Principle,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{principle}
+\tcolorboxenvironment{principle}{colback=LightGreen}
+\newtheorem*{definition}{Definition}
+\newtheorem*{remark}{Remark}
+\newcommand{\R}{\mathbb{R}}  
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand\m[1]{\begin{bmatrix}#1\end{bmatrix}} 
+\newcommand{\cd}{\cdot}
+\newcommand{\as}{a_1,a_2\dots a_n}
+\newcommand{\bs}{b_1,b_2\dots b_n}
+\newcommand{\vs}{v_1,v_2\dots v_n}
+\newcommand{\sr}[1]{#1_1,#1_2,\dots #1_r}
+\newcommand{\mn}{m \times n}
+\newcommand{\oh}{\mathcal{O}}
+\newcommand{\calm}{\mathcal{M}}
+\newcommand{\MN}{M \times N}
+\newcommand{\ws}{w_1,w_2\dots w_n}
+\newcommand{\fb}{\mathcal{B}}
+\newcommand{\brac}[1]{\{#1\}}
+\newcommand{\veca}{\Vec{a}}
+\newcommand{\vecb}{\Vec{b}}
+\newcommand{\vecc}{\Vec{c}}
+\newcommand{\lincom}{a_1v_1+a_2v_2+\dots+a_nv_n}
+\newcommand{\vr}{v_1,v_2\dots v_r}
+\newcommand{\li}{linearly independent }
+\newcommand{\ld}{linearly dependent }
+\newcommand{\op}{\oplus}
+
+
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+
+\setstretch{1.2}
+\geometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ------------------------------------------------------------------------------
+
+\title{ \normalsize \textsc{}
+		\\ [2.0cm]
+		\HRule{1.5pt} \\
+		\LARGE \textbf{\uppercase{Linear Algebra}
+		\HRule{2.0pt} \\ [0.6cm] \LARGE{ } \vspace*{10\baselineskip}}
+		}
+\date{\today}
+\author{\textbf{Author:}\textbf{ $ \mathscr{H. Li}$} \\ 
+		Instructor: J. Hong \\
+		Math 577 \\
+		UNC - CH\\\LaTeX
+  }
+  
+
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+
+\section{8/21/23 - Mon}
+\subsection{Field and its Properties}
+\begin{definition}[Field]
+$\R \mathbb{C} \Q$ 
+k:  is a field if k has operations and satisfies 
+\begin{enumerate}
+    \item k contains $0 \& 1$
+    \item a+0=1,a a $\cdot 1 =a$
+    \item a+b=b+a, (a+b) $\cdot $ c=a $\cdot c + b \cdot c$
+    \item $a \not = 0, a $ has multiplicative inverse  $i.e. a \in K$ $ a \cdot a ^{-1}=1, a^{-1}\in K$
+    \item $\forall a \in k$ has an additive inverse -a
+    \item associativity for + and $\cdot$
+
+\end{enumerate}
+
+\end{definition}
+examples that $\mathbb{Q, R, C} $ are fields \\
+$\mathbb{Q}(i)=\{a+bi : a,b\in \Q\}$ is a field
+$$i^{-1}=-i| (a+bi)^{-1}=\frac{a-bi}{a^\alpha+b^\alpha}$$
+$\Z$ is not a field. Because not all element has a multiplicative inverse\\
+\subsection{vector space}
+\begin{definition}[Vector spaces]
+let K be a field. $K^n=\{(a_1,a_2,a_3\dots a_n)| a_i\in K\}$ where as a is a vector\\
+$\underbrace{(1,0,\dots ,0)}_{e_1}$$\underbrace{(0,1,\dots ,0)}_{e_2}$ $\dots $$\underbrace{(0,0,\dots ,1)}_{e_n}$\\
+also $\Vec{0} \in K$
+
+\end{definition}
+
+addition:$(a_1,a_2 \dots a_n)+(b_1,b_2,b_3\dots b_n)=(a_1+b_1,a_2+b_2\dots a_n+b_n)$\\
+scalar multiplication: $c\in K c \cdot (a_1,a_2,a_3\dots a_n)=ca_1,ca_2,ca_3\dots ca_n$
+They satisfy the following requirement
+\begin{enumerate}
+    \item $\Vec{a}+\Vec{a}=\Vec{a}$
+    \item $\Vec{b}+\Vec{a}=\Vec{a}+\Vec{b}$
+    \item $c \cdot (\Vec{a}+\Vec{b}) =c\cdot \Vec{a}+c \cdot \Vec{b}$
+    \item$c_1c_2\cdot \Vec{a}=c_1\cdot(c_2\cdot \Vec{a})$
+    \item $(c_1+c_2)\cdot \Vec{a}= c_1\Vec{a}+c_2\Vec{a}$
+    \item $1 \cdot \Vec{a}=\Vec{a}$
+    \item $\Vec{a}+-\Vec{a}=0$
+    \item 
+    \item \end{enumerate}
+
+    with all the prereq, $K^n$ is a vector space over K
+\begin{definition}[general vector space]
+a set V with origion 0 $\in V$ together, closed addition and scalar multiplication\\
+i.e.$ \Vec{V}+\Vec{W}\in V, c \cdot v \in V $ also $c \in K, v,w \in V$ is called vector space over K if all the above holds\\
+any element v $\in$ V is called vectors of V\\
+
+
+
+    
+\end{definition}
+
+
+e.g.
+\begin{enumerate}
+    \item $\R C(\R)-$ \{ continuous function on R is a v space over $\R$ \}
+    \item $f+g \in C(\R)$
+    \item $a \in \R$ a $\cdot $ f, a function $f \in C(\R) $ is a vector
+\end{enumerate}
+
+more general X is a set k(X)=\{ x $\to$ k \} is a v space over K
+$\forall f,g \in k(x)\\(f+g)(x)=f(x)+g(x)\\ (c\cdot f)(x)=c\cdot f(x) $
+
+\section{8/23/23 - Wed}
+\subsection{fields}
+last class recall that V is a vector space over $\underbrace{K}_\text{field, k= $\R$ or $\C$}$ note in this class, $\R$, $\C$ is our field 
+\\
+$\underbrace{V}_{\text{vector}} \cd \underbrace{W}_{\text{vector}} \in V$
+\\also $V+W \in V$\\$0 \in V$
+\\
+\subsection{subspaces}
+\begin{definition}
+[subspaces]    V is a vector space over k we say the subset $W \subseteq V$ is a subspace if it is closed under
+\begin{itemize}
+    \item addition
+    \item multiplication
+\end{itemize}
+
+    $$v+w \in W$$
+    $$v \cd w \in W$$
+ 
+ $\forall v,w \in W, a \in K$ 
+ \\note this definition also implies that $0 \in W$
+ e.g. $V=k^n$ $W=\{(a_1,a_2,a_3\dots a_n) \in K^n | \Sigma_{i=1}^n a_i=0\}$ $w \subseteq v $ subspace
+
+ \end{definition}
+\subsection{Linear Combination}
+we have vectors $v_1,v_2,v_3 \dots v_n \in V$ and scalars $a_1,a_2,a_3\dots a_n \in K$
+and we call $a_1+v_1,a_2+v_2,a_3+v_3$ \textbf{linear combination} of $v_1,v_2 \dots$
+e.g. we have $ e_1(1,0) \land e_2(0,1)\in k^2$
+example we have $(3,2)=
+\underbrace{3}_{\text{scalar}}\underbrace{e_1}_{\text{vector}}+2e_2$
+\begin{proposition}
+    given $v_1,v_2 \dots v_n$ W=set of all possible linear combination of $v_1\dots v_n$ then, W is a subspace of V.
+\end{proposition}
+\begin{proof}
+    given $a_1v_1 \dots a_nv_n$ and $b_1\dots b_n$ =($a_1+b_1$)$v_1$+$(a_2+b_2)v_2$ +$\dots$ $(a_n+b_n)v_n$ is also an linear combination\\
+    property 2. $c(a_1v_1+a_nv_n)=c(a_1)v_1+c(a_n)v_n$
+    
+\end{proof}
+\subsection{Dot Product}
+$\Vec{a} (\as) \Vec{b}(\bs)$
+\\$\Vec{a}\cd\Vec{b}=a_1b_1+a_2b_2\dots a_nb_n$\\
+\begin{remark}[properties of dot product] \phantom\\
+\begin{itemize}
+    \item $\Vec{a}\cd\Vec{b}=\Vec{b}\cd\Vec{a}$
+    \item $\Vec{a}\cd(\Vec{b}+\Vec{c})=$ $\veca \cd \vecb+\veca \cd \vecc$
+    \item $\underbrace{(c\cd \veca)}_{\text{scalar multiples}}\cd\vecb=c(\veca\cd \vecb)$
+
+    \end{itemize}
+
+\end{remark}
+
+\begin{definition}[orthogonal]
+we say 2 vectors $\veca , \vecb \in k^n$ are \textbf{perpendicular } or \textbf{orthogonal} if their dot product is 0 in $k^n$
+\\ in notation $e_i \cd e_j=0$\\
+hence we write $\veca \perp \vecb$\\
+    
+\end{definition}
+recall $W=\{(\as )|a_1+a_n=0 \subseteq k^n \equiv \{\veca |\veca \cd (1,1,1)\})$
+more generally $\vecb (\bs)$
+$W\{\veca \in k^n | \veca \cd \vecb =0\} \subseteq k^n$
+
+
+give n 2 sub spaces $w_1$ and $w_2$ we have 2 operations 
+\begin{enumerate}
+    \item $$w_1\cap w_2$$
+    \item $$w_1+w_2$$
+
+\end{enumerate}
+Notice that both of those operations preserves sub spaces. \\
+$(w_1+w_2)+(w'_1+w'_2)=(w_1+w'_1)+(w_2+w'_2)$
+\subsection{linear independence}
+\begin{definition}
+    [Linear independence] V is a vector space over K, we say that $\vs$ $\in V$ are \textbf{linearly dependent }over K if there exists $\as$ such that not all of them are zero and $a_1v_1+a_2v_2+a_3v_3+\dots a_nv_n=0$\\
+    otherwise we call it linearly independent\\
+\end{definition}
+\begin{remark}
+    we have $k^2$ where as we have (1,0)(0.1) V(2,5) such that $=2e_1+3e_2$ hence we know that 
+    $$v-2e_1-3e_2=0$$ Thus $e_1 \land e_2$ are not linearly independent\\
+
+    
+\end{remark}
+
+\begin{remark}
+    notice that $e^t $ and $e^{2t}$ functions are linearly independent
+    \begin{proof}
+        suppose that there are linearly dependent then we have a,b such that \\
+    $$    ae^t+be^{2t}=0$$
+    factor out a $e^t$ we have 
+    $$a+be^t=0$$taking derivative of both sides we have
+$$be^t=0$$
+but $e^t \not =0$ hence b=0 and a=0 which we have arrived at an contradiction  \lightning
+    \end{proof}
+\end{remark}
+
+\begin{definition}[alternative definition of vector space]
+V is a vector space if 
+\begin{enumerate}
+    \item $\vs $ are linearly independent
+    \item $\vs$ \textbf{\textit{generates}} V
+    \begin{enumerate}
+        \item i.e. any vector $v \in V $ is a linear combination of $\vs$
+    \end{enumerate}
+    \begin{enumerate}
+        \item e.g. $e_1,e_2,e_3\dots e_n$ are linearly independent and clearly
+        \begin{enumerate}
+            \item $e_1,e_2,e_3\dots e_n$ generates V
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+\end{definition}
+\section{8/25/23 - Fri}
+Last class recall V is a vector space over K $\vs \in V$
+\begin{definition}
+    [Linear Combination] $\lincom$ $W=\{\sum a_iv_i|a_i\in K\} \subseteq V$
+    \\$\vs $ are linearly dependent if 
+    $\lincom=0$ for $\forall \neq 0 a_i$
+    \\otherwise we call $\vs$ are linearly independent\\
+    
+\end{definition}
+\begin{definition}
+    [basis] \[\vs \] is a \textbf{basis } if and only if:
+    \begin{enumerate}
+        \item $\vs $ are linearly independent
+        \item $\vs$ \textbf{ generates } V
+    \end{enumerate}
+\end{definition}
+\begin{theorem}
+    Assume that $\vs$ are linearly independent $\in V$ then $\lincom=b_1v_1+b_2v_2+\dots+b_nv_n$ then $a_i=b_i \forall i$
+    $a_ib_i\in K$\\
+\end{theorem}
+\begin{proof}
+$\phantom{,}$\\
+\begin{alignt*}
+(\lincom)-(b_1v_1+b_2v_2+\dots+b_nv_n)\\
+=(a_1-b_1)v_1+\dots+(a_n-b_n)v_n\\=0
+\end{alignt*}
+
+   
+\end{proof}
+Note: Linearly independent of $\vs \Rightarrow a_i-b_i=0$\\$\Leftrightarrow a_i=b_i$
+
+\begin{corollary}[uniqueness of $a_i$]
+$\phantom{f}$
+    if $\vs$ is a basis of V, then $\forall v \in V$\\$V=\lincom$ for unique $a_i \in K$
+    
+\end{corollary}
+\begin{definition}
+    [coordinates] if $\vs$ is a basis, if V=$\lincom$\\ we call $\as$ the coordinates of v with reference of this basis\\
+    e.g.$\{\underbrace{(1,1)}_{v_1},\underbrace{(1,-1)}_{v_2}\}$ is a basis of $K^2$
+    \begin{proof}
+        1. linear independence\\
+        suppose  $\exists a,b$ s.t. $a\cd (1,1)+b\cd(1,-1)=0, K=\R \text{ or } \C$\\
+        $(a+b)(a-b)=0$\\$(a+b=0)$\\$(a-b=0)$\\$(a=0,b=0)$\\Contradiction \lightning
+        \\2.$v_1,v_2 $ generates K\\
+        Given $(a,b) \in K^2$\\
+        $(a,b)=\frac{a+b}{2}(1,1)+\frac{a-b}{2}(1,-1)$
+    \end{proof}
+\end{definition}
+
+\subsection{finitely generated vspace}
+\begin{definition}
+    [Finitely generated] We say V is \textbf{ finitely generated } over K if there exists $\vs \in V$ which generates to V and its finite\\ 
+\end{definition}
+\begin{theorem}
+    [] Suppose that $\vs$ generates V. Let $\{v_1\dots v_r \}$ be the maximal subset of linearly independent of vectors in $\{\vs \}$ then $v_1\dots v_r$ form a basis
+\end{theorem}
+\begin{proof}
+    By assumption, we know that $\vr$ are linearly independent\\
+    $\forall k, k>r$\\ $\vr,v_k$are linearly dependent\\
+    $i.e. a_1+v_1+\dots+a_rv_r+bv_k=0$ for some a,b $\neq 0$ in fact b $\not =0$ \\
+    $$v_k=-\frac{a_i}{b_i}v_i-\dots-\frac{a_r}{b}v_r$$
+ which implies $\vs$ generates V \\Hence $\vr$ is a basis
+    
+\end{proof}
+
+\subsection{dimension of v space}
+
+\begin{theorem}
+    [linearly dependent for n$>$m] Let v be a vector space over K and let $\{v_1 \dots v_m \}$ be a basis of V, let $\{w_1 \dots w_n\}$ be vectors in V, assume $n>m$ then $w_1 \dots w_n$ are linearly dependent
+\end{theorem}
+\begin{proof}
+    [ proof by contradiction]\\Assumes that $w_1,w_n$ are linearly dependent $(\star)$\\
+    For simplicity, let m=2 $n>2$ and assume that $w_i \not =0 \forall i$
+    \\First of all $w_1 $can be written as 
+    $$w=a_1v_1+a_2v_2$$
+Since $a_1,a_2 $ cannot both be 0 WLOG we may assume that $a_1 \neq 0$ then
+$$v_1=\frac{1}{a_1}w_1-\frac{a_2}{a_1}v_2$$
+Because $v_1, v_2 $ generates V by the definition of v space $\to$ $w_1, v_2$ generates V if we do this repeatly\\
+Thus $$w_2=b_1w_1+b_2w_2$$ where as $b_2\neq0$
+$$v_2=\frac{1}{b_2}w_2-\frac{b_1}{b_2}w_1\ $$
+This means that 
+$$w_1,w_2 \text{generates V which contradicts} \star$$
+\lightning
+
+\end{proof}
+
+
+\begin{corollary}
+(1.2 cardinality of the basis)    Any 2 basis of V have the same cardinality
+\end{corollary}
+\section{8/28/23 - Mon}
+Last class\\
+Let V be a V space over K \\
+recite the definition of basis lol
+\begin{theorem}[A]
+and let $v_1,v_2\dots v_m$ be a basis of V and let $\ws$   be any vectors in V and if $n>m$ then $\ws$ are linearly independent \\
+
+
+\end{theorem}
+\begin{proof}
+    Last we have proven m=2\\
+    case m=3
+    $\brac{v_1,v_2,v_3}$ is a basis for $n>3$\\
+    $w_1=a_1v_1+a_2v_2+a_3v_3 \Rightarrow v_1=\frac{1}{a_1}w_1-\frac{a_2}{a_1}v_2-\frac{a_3}{a_1}v_3$
+    \\WLOG assume that $a_1\neq 0 \Rightarrow$ $w_1,v_2,v_3$ generates V\\
+    $$w_2=b_1w_1+b_2v_2+b_2v_3$$ WLOG assume that $b_2\not=0$\\
+    $$V_2=\frac{1}{b_2}w_2-\frac{b_1}{b_2}w_1-\frac{b_3}{b_2}v_3$$ Thus $w_1w_2v_3  $ \textbf{generates }V\\
+    $$w_3=c_1w_1+c_2w_2+c_3v_3$$ 
+    which gives us $$ v_3=\star w_1+\star w_2+\star v_3$$
+    which means that $w_1w_2w_3$ \textbf{Generates } $v_1$\\
+and $w_4=w_1+w_2+w_3 \to $ \lightning
+    
+\end{proof}
+
+This allows us to arrive at an immediate corllary\\
+\begin{corollary}
+   i any 2 basis of V have the same cardinally
+\end{corollary}
+\begin{proof}
+    $\# \mathcal{B}=\brac{\vs}$ be a basis and let \\
+    $\#\mathcal{B'}=\brac{\ws}$  \\
+    by the above theorem, we can immediately conclude that $$\#\mathcal{B}=\#\mathcal{B'}$$
+\end{proof}
+\subsection{dimensions \& maximal set}
+\begin{definition}
+    [Maximal set] $\vs$ are linearly independents $\in V$
+    \\we say that $\vs$ form a \textbf{maximal set} of linearly independent vectors of V. \\i.e. $\forall w \in V w_1\vs $ are \ld
+\end{definition}
+\begin{theorem}
+    [B] Any maximal set of \li vectors of V is a basis
+\end{theorem}
+\begin{proof}
+    let $\vs$ be a maximal set of \ld vectors of V be a basis\\
+    then, for all $w\in v$ are \ld\\$w_1 \vs $ are \ld\\
+    $bw+\lincom \to w =\star v_1+\dots + \star v_n$\\
+    are linearly independent hence generates V
+    
+\end{proof}
+\begin{theorem}
+    [C] let V be a vspace over K and let $\dim V=n$
+    \\let $\vs$ be any set of \ld vectors $\in V$ then $\vs$ is a basis\\
+    \end{theorem}
+\begin{proof}
+    By theorem A, we know that $\brac{\vs}$ is a maximal set of \ld vectors\\
+    Then by theorem B $\brac{\vs}$ is a basis
+\end{proof}
+Note: \#maximal set =$\dim V$\\
+\begin{corollary}
+K let W be a subspace of V, if $\dim w =\dim V$ then $V=W$\\i.e. Any proper subspace of w has $\dim W < \dim V$
+\end{corollary}
+\begin{proof}
+    suppose that $\dim W=\dim V=n$\\then $\exists \ws$ such that it is a basis of W\\$\ws$ is also a basis of v so $W=V$
+    
+\end{proof}
+\begin{corollary}
+    L suppose that $\dim V=n$ let $v_1\dots c_r ,r<n$ be \li, then we can find vectors $v_{r+1} \dots v_n$ such that $v_1\dots v_r, v_{r+1} \dots v_n$ forms a basis of V
+    
+\end{corollary}
+\begin{proof}
+    $\brac{v_1\dots v_r}$ is NOT a maximal set of \li vectors then $\exists v_{r+1}$ such that $v_1,v_r,v_{r+1}$ are \li if $r+1=n$ then we are done\\otherwise we can find vectors $v_{r+1}\dots v_n$ such that $\vs $ are \li
+\end{proof}
+
+\begin{theorem}
+    [D] let V be a vspace over K such that $\dim V=n$ and W is a proper subspace of V\\Then W has a basis and $\dim w<n$
+    
+\end{theorem}
+\begin{proof}
+    if W=0, then we are done\\
+    Otherwise suppose that $W \neq 0$ \\There exists a $w_1\in W \neq 0$ \\
+    tbc.....
+\end{proof}
+
+
+
+\section{8/30/23 - Cancelled}
+
+
+\section{9/1/23 - Fri}
+
+recall: Let V be a finite dimension vector space over K\\
+$\dim V = \# \mathcal{B} , \fb =\brac{\vs}$ is a basis\\
+\begin{theorem}
+    Any max set of \li vectors is a basis
+\end{theorem}
+\begin{theorem}
+    if $\dim V=n$ and $\vs \in V$ are \li then $\vs$ is a basis
+\end{theorem}
+\begin{corollary}
+i $\dim v=n, v_1,v_2\dots v_r$and $v<n$ are \li, then $\exists v_{r+1}\dots v_r$ such that $v_1\dots v_r,v_{r+1},\dots, v_n$ is a basis
+\end{corollary}
+\begin{theorem}
+$\dim V=n$ and let W be any proper subspace of V, then W has a basis and $\dim W<n$
+\end{theorem}
+\begin{proof}
+    suppose W has no max set of \li vectors then $\exists$ vectors $v_1,v_2,v_3\dots $such that $$\brac{v_1}\subset \brac{v_1,v_2}\subset \brac{v_1,v_2,v_3}$$ are \li but this contradicts $\dim V=n$ \lightning
+    Thus W has a max set $\brac{\sr{w}}$ of \li vectors $r \leq n$ which is a basis since $w \subsetneq v$ $\sr{w}$ does not generate V
+    \\Hence $\brac{\sr{w}}$ is not a basis of V\\
+    in particular $r<n$
+\end{proof}
+\subsection{sums \& direct sums}
+Let V be a vector space over K, Let W,U be subspaces of V
+\\recall $w+u=\brac{w+u|w\in W,u\in U}$
+\begin{definition}
+    [direct sum] let W,U be subspaces of V, we say V is a direct sum of W and U if \begin{enumerate}
+        \item V=W+U
+        \item $\forall v \in V$ can be written as a sum of w=w+u in a \textbf{ unique} way 
+    \end{enumerate}
+    we denote this $V=W \oplus U$
+\end{definition}
+\begin{theorem}
+    let let W,U be subspaces of V, if $V=W+U$ and  $W \cap U=0$ then $V=W\oplus U$
+\end{theorem}
+\begin{proof}
+    $V=u_1+w_1=u_2+w_2\to w_1-w_2=u_1-u_2 \land w\cap u=0\to w_1=w_2,u_1=u_2$ 
+    \\This is a uniqueness proof\\
+\end{proof}
+\begin{theorem}
+    let V be a vector space, for any subspace $W \subseteq V $ there exists a \textbf{Compliment U} of W such that $V=W\oplus U$
+    
+\end{theorem}
+\begin{proof}
+    By previous theorem $\exists$ a basis $\brac{\sr{w}} $of $ W$ which can be extended to a basis $\brac{\sr{w},w_{r+1}\dots w_n}$of V such that U=span$\brac{w_{r+1} \dots w_n}$Then, $V=W\oplus U$
+    
+\end{proof}
+Note: The author omitted a step that needed to prove  that $U \cap W =0$because the instructor's handwriting is unreadable \frownie \\
+\begin{theorem}
+    [Dimensions of Direct sum v spaces] If $V=W\oplus U$ then $\dim V=\dim U+ \dim W$ 
+\end{theorem}
+
+\begin{proof}
+    Choose a basis$ \brac{u_1,u_2\dots u_s}$ of U and a basis $\brac{w_1,w_2,\dots w_t}$ of W. Then $\brac{u_1,u_2\dots,u_s,w_1,w_2\dots,w_t}$ forms a basis for V
+\end{proof}
+\begin{remark}
+    Given subspaces $w_1,w_2,w_k \subseteq V$\\$w_1,w_2+\dots w_k=\brac{w_1+w_2+\dots+w_k|w_i\in w,1\leq i\leq k} $ is a subspace of V
+\end{remark}
+\begin{definition}
+    We say that V is a direct sum of $w_1,\dots w_k$. If $\forall v \in V$ The summation $V=w_1+\dots+w_k$ is unique\\We write $V=w_1\op w_2\op w_3\op \dots \op w_{ki}|w_1\in w_i$
+    
+\end{definition}
+e.g. $$\R^3 =\underbrace{l_x}_{\R_{e_1}} \op \underbrace{l_y}_{\R_{e_2}} \op \underbrace{l_z}_{\R_{e_3}}$$
+
+
+\begin{theorem}
+    $w_1\dots w_k$ be subspaces of V if $V=w_1+\dots w_k$ and $w_i \cap$$ (\sum_{j\neq i}w_j )$ then $V=w_1\op \dots \op w_k$
+\end{theorem}
+\begin{proof}
+    k=3\\$V=w_1+w_2+w_3=w_1'+w_2'+w'_3$\\$\to w_1-w_1'=w_2-w_2'=w_3-w_3'$
+\end{proof}
+\begin{lemma}
+    * $w_1 \cap (w_2+w_3)=0$\\ then $v=w_1=w_2+w_3$
+    
+\end{lemma}
+\section{9/6/23 - Wed}
+recall: direct sum $W, U, \subseteq V$
+$V=W\op U$ if\\
+$\exists $ a unique $w\in W u \in U$ s.t.\\
+V=w+u and $w\cap u=0$\\
+Given 2 vectors $w,u$\\
+Let $w \times u$ be a direct product\\
+$w \times u =\brac{(w,u)|w\in W,u \in U}$
+\\$W \times U$ can be endowed w/ a vector space structures\\
+Additives $(w,u)+(w'+u')=(w+w',u+u')$
+\\scalar multiplication a(w,u)=(aw,au)\\
+$W \times U$ is a vector scpace over K\\
+$ex: \dim W\times U$
+$\brac{\ws}$ be a basis of W
+\\$\brac{u_1,u_2\dots u_m}$ be a basis of U
+\\$$\brac{(w_1,0)\dots (w_n,0)\newline (0,u_1\dots(0,u_m))}$$ is a basis of $W \times U$\\
+\underline{in fact} W can be identified w/ $\brac{(w,0)|w\in W} \subseteq W\times U$
+\\U can be identified w/ $\brac{(0,u)|u \in U}\subseteq W\times U$\\
+under  such identification $W \times U = W \op U$\\
+$W \subseteq W \times U$
+\\$W \to (W,0)$
+\begin{remark}
+    Given $\vs$ we can define their produce $V_1 \times V_2 \times V_3 \dots \times V_n$ to be a vector space
+\end{remark}
+\subsection{Matricies}
+we call matricies $$\m{a_{11}&a_{12}&\dots &a_{1_n}\\a_{21}&a_{22}&\dots &a_{2n}\\ \dots &\dots&\dots&\dots\\a_{m1}&a_{m2}&\dots& a_{mn}}$$
+This is a $m\times n$ matrix over a field K$(\R,\C,\Q\dots)$\\
+Where a row vectors are \\$a_1=(a_{11},a_{12}\dots a_{1m})$\\$\dots$\\$a_m={a_{m1},a_{m2},\dots,a_{mn}}$
+\\Where column vectors are \\
+$a^1=\m{a_{11}\\a_{21}\\\dots\\a_{n1}}$
+\\$\dots$\\
+$a^n=\m{a_{1_n}\\a_{2n}\\\dots\\a_{mn}}$
+
+\begin{definition}
+[square matrix] if m=n then A is a square matrix\\
+
+\end{definition}
+\begin{definition}
+[zero matrix]$A_{ij}=0 \forall i,j$ Then a is a zero matrix\end{definition}
+\begin{definition}
+[diagonal matrix] the square matrix A is called diagonal if $$A=\mqty[\dmat{x,\dots,\dots,x}] $$
+\end{definition}
+\begin{definition}
+    [Upper triangular matrix] The square matrix a A is upper triangular iff $$A=\m{x&x&x&x\\&x&x&x\\&&x&x\\&&&x}$$
+\end{definition}
+\begin{definition}
+    [Lower triangular matrix] The square matrix A is lower triangular iff $$A=\m{x&&&\\x&x&&\\x&x&x&&\\x&x&x&x}$$
+\end{definition}
+A $m\times n$ matrix is transposed when \\
+$$A=\m{a_{11} &\dots&a_{1n}\\a_{21}&\dots&a_{2n}\\\dots&\dots&\dots\\ a_{m1}&\dots&a_{mn}}\sim  A^t=\m{a_{11}&\dots& a_{m1}\\\dots&\dots&\dots\\a_{1n}&\dots&a_{mn}}$$
+we denote this $a^t\equiv ^ta\equiv A^T\dots$
+\\Let $\mathcal{M}_{m\times n}(K)=\brac{m \times n\text{ matricies over K}}$
+\\Addition of scalar muplication, on $\mathcal{M}_{m\times n}(K)$\\
+$A+B (A=a_{ij},B=b_{ij})$\\
+$=a_{ij}+b_{ij}$
+$\forall c \in K, c\cd A = (ca_{ij})$
+\\Zero matrix $\mathcal{O} \in \mathcal{M}_{m\times n}(K)$
+\\A $m \times n $ matrix A is called symmatri iff $A = A^t$
+\subsection{sys. of Linear Eqns}
+Given $a_{11}x_1+\dots +a_{1n}x_n=b_1$\
+\\$\dots$\\$a_{m1}x_1+\dots +a_{mn}x_n=b_1$\
+
+
+if $\forall b_i=0$ we call this system homogeneous\\which can be written as
+\begin{equation*}
+    (\star) \hfill  x_1\m{a_{11}\\a_{12}\\\dots\\ a_{m1}}+x_2\m{a_{12}\\a_{22}\\\dots\\ a_{m2}}+\dots+x_n\m{a_{1n}\\a_{2n}\\\dots\\ a_{mn}}=\m{b_1\\b_2\\\dots\\b_m}
+\end{equation*}
+
+To find a solution of such eqn is equiv to express $\m{b_1\\b_2\\\dots\\b_m}$
+as a linear combination of \\$A'=\m{a_{11}\\a_{21}\\\dots\\a_{m1}}\dots \m{a_{1m}\\a_{2m}\\\dots\\a_{mn}}$
+\section{9/8/23 - Fri}
+\begin{theorem}
+    [Linear independence of solns]In a linear system $\star$, assume that m=n, and $A^1,A^2,\dots A^n$ are \li then, $\star$ has a unique solution.
+\end{theorem}
+\begin{proof}
+    Let $A^1,A^2,\dots A^n \in \mathbb{K}^n$ and they are \li. Thus they form a basis $\to B=c_1A^1+\dots c_nA^n$ for unique numbers\\
+    i.e. $(c_1,c_2,\dots,c_n)$ is a unique solution.
+\end{proof}
+
+\subsection{Matrix multiplications}
+Let $$A=\as \in \mathbb{K}^n$$
+$$B=\bs \in \mathbb{K}^n$$
+recall their dot product $A \cd B=a_1b_1+a_2b_2+\dots+a_nb_n$
+\\They have some nice properties
+\begin{enumerate}
+    \item $A\cd B=B\cd A$
+    \item $c \in \mathbb{K}, (cA)B=c(AB)=A(cB)$\\
+\end{enumerate}\\
+\begin{definition}
+    [Matrix multiplication] Given 2 matrices \\
+    $A=a_{ij} \mn$ matrix\\$B=b_{ij} n\times k$ matrix\\
+We define a matrix multiplication $AB$ as 
+$$AB=\m{A_1B^1&A_1B^2&\dots&A_1B^k\\A_2B^1&A_2B^2&\dots&A_2B^k\\\dots &\dots &\dots &\dots\\A_mB^1&A_mB^2&\dots&A_mB^k}$$
+e.g. $a=\m{2&1&5\\1&3&2} b=\m{3&4\\-1&2\\2&1}$
+\\$ab=\m{15&15\\4&12}$
+\end{definition}
+
+In general let $A:\mn, B:n\times k AB-m\times k$\\
+Let A =$a_{ij}$ be a $\mn$ matrix\\
+let $B=\m{b_1\\b_2\\\dots \\b_n}$ which is a column vector $n\times 1$ matrix\\
+Their product AB is a $\m{A^1B\\A^2B\\\dots\\A^nB}$ col vector
+\\A system of linear equation $\star$ can be written as $$Ax=B$$where $$X=\m{x_1\\x_2\\\dots\\x_n}$$
+Where as $c:(c_1,c_2,\dots,c_m)$ is a row vector\\
+cA=$(cA^1,cA^2,\dots,cA^n)$ has a $\#=n$
+\\can be alternatively written as the prduct of\\
+
+$$(c_1,c_2,\dots,c_m)\cd\m{a_{11}&a_{12}&\dots\\a_{21}&a_{22}&\dots\\\dots&\dots&\dots\\a_{m1}&a_{m2}&\dots}\equiv \m{A^1&A^2&\dots&A^m}$$
+
+\begin{theorem}
+    A $\mn$ matrix B $n \times k$ matrix  A(B+C)=AB+AC\\
+    Notation A matrix $\rightsquigarrow$ $A_{ij}=ij$ entries of A\\
+    if $A=a_{ij}$ then $(AB)_{ij}=A_iB_j$
+\end{theorem}
+\begin{proof}
+$    (A(B+C))_{ij}$\\
+$=A_i(B+C)^j$\\
+$=A_i(B^j+C^j)$\\
+$=A_iB^j+A_iC^j$\\
+$=(AB)_{ij}+(AC)_{ij}$
+$=(AB+AC)_{ij}$
+\end{proof}
+\begin{theorem}
+[commutativity of scalar multiplication]    let $c \in \mathbb{K}$
+    \\$(cA)B=A(cB)$\\Assume $A.B=m \times n$ matrix and let $C=n\times k$ matrix then $(A+B)C=AC+BC$
+\end{theorem}
+\begin{theorem}
+    [commutativity of matrix multiplication]let ABC be mutually manipulable matrices  then $(AB)C=A(BC)$
+    
+\end{theorem}
+
+\section{9/11/23 - Mon}
+
+Recall $A=(a_{ij})$ be a $\mn$ matrix
+$B=b_{ij}$ be a $n\times k$ matrix
+\\$AB=(c_{ij})$ of a matrix\\
+$(AB)_{ij}=A_iB^j=(a_1,a_2,\dots,a_n)\cd \m{b_{1j}\\b_{2j}\\\dots \\b_{nj}}$
+
+
+
+\begin{theorem}
+    A: $\mn $ matrix B:$n\times k $ matrix C:$k \times l$ matrix\\
+    $(AB)C=A(BC)$ (assoc.)
+\end{theorem}
+\begin{proof}
+    A=$a_{ij}$ B=$b_{ij} C=c_{ij}$\\
+    $AB_{ij}=\sum_{s=1}^n a_{is}b_{sj}$
+    $((AB)C)_{ij}=\sum_{t-1}^k (AB)_{it}C_{tj}=\sum_{t=1}^k(\sum_{s=1}^n a_{is}b_{st})c_{tj}=\sum_{t=1}^k\sum_{s=1}^n a_{is}b_{st}c_{tj}$\\
+    similarly\\
+    $(A(BC))_{ij}=\sum_{s=1}^na_{is}(BC)_{sj}$
+    $=\sum_{s=1}^na_{is}(\sum_{t=1}^kb_{st}c_{kj})$\\
+    \\=$\sum_{s=1}^n\sum_{t=1}^ka_{is}b_{st}c_{tj}$
+The summation can be switched    
+\end{proof}
+let $A=\ij{a}$ be a $\mn $ matrix
+\\$\ij{A^t}=a_{ji}$ then $A^t=n\times m$ matrix\\
+$B=n\times k$ matrix\\
+$B^t=k\times n$ matrix\\
+\begin{theorem}
+    $(AB)^t=B^tA^t$
+\end{theorem}
+\begin{proof}
+    $\ij{(AB)^t}=(AB)_{ji}=\sum_{s=1}^n a_{js}b_{si}$\\
+    $\ij{(B^tA^t)}=\sum_{s=1}^n (B^t)_{is}(A^t)_{sj}=\sum_{s=1}^n b_{si} a_{js}$
+    
+\end{proof}
+\subsection{Linear maps}
+\begin{definition}
+    [Linear maps] Let v,w, be vector spaces over K, a map $F: V\to W$ is called linear if 
+    \begin{enumerate}
+        \item $F(V+U)=F(U)+F(V) \forall v,u \in V$
+        \item $F(av)=aF(v), \forall a \in K, v\in V \equiv F(au+bv=aF(u)+bF(v))$
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    $F(0)=0$
+\end{remark}
+e.g. let $P: K^3\to K^2$
+\\1.$(x,y,z) \mapsto (x,y)$\\
+2. $\C^\infty (\R) \to \C^\infty(\R)$\\$f \mapsto \frac{df}{dx}$\\
+3. $A=(a,b,c)\in K^3$\\
+$F_A: K^3 \to K$ given by $F_A(x,y,z)=ax+by+cz=A\cd(x,y,z)$
+\\hence $F_A$ is linear\\
+let $A=\ij{a}$ be a $\mn$ matrix\\
+we define a map $F_A:\underbrace{K^n \to K^m \text{which is linear}}_{x \mapsto AX=\m{A_1\cd x\\a_2\cd x\\\dots\\A_m\cd x}}$
+\\Let V be a vector space over K\\
+Identity map $V\to V$ 0 map $V\to V, V\to 0$ they are all linear\\
+Given a basis $ \mathcal{B}: \brac{\vs}$ of V\\
+$F_{\mathcal{B}}: V\to K^n$\\
+$v\mapsto (x_1,x_2\dots x_n)$ where $v=x_1v_1+\dots+x_nv_n $\\
+and we know $F_\mathcal{B}$ is linear\\
+$v=\sum x_iv_i, w=\sum y_iv_i, v+w\sum(x_1+y_i)v_i$\\
+hence $F_\mathcal{B}(w)=F_\mathcal{B}(V)$\\
+see pic
+Given $V,W$ such that they are vector spaces over K\\
+$L(V,W)=\brac{\text{Linear maps from V to W}}$\\
+Then $L(V,W)$ is a vector space over K\\
+So we have fcns F,G, $(F+G)(v)=F(v)+G(v)$\\$(AF)(v)=aF(v)$\\
+$0\in L(v,w)$\\
+$0: v \to w$
+\\$v \mapsto 0$\\
+\begin{theorem}
+    v,w, as arb. and let $\mathcal{B}=\brac{\vs}$ be a basis of V, and let $\brac{\ws}$ be a arb set of vectors in W.\\
+    There exists a unique linear map $F:V\to W$ such that $F(v_1)=w_1,f(v_2)=w_2\dots f(v_n)=w_n$\\
+    
+\end{theorem}
+\begin{proof}
+    F(v)=$a_1w_1+\dots+a_nw_n$\\where $v=\lincom$
+    Then one way check F is linear
+    
+\end{proof}
+see pic
+
+\section{9/13/23 - Wed}
+Recall:
+A linear map
+$F:V \to W$, $V,W /K$
+\\$F(au+bv)=aF(u)+bF(v) a,b \in K, u,v \in V$
+\\$L(v,w)=\brac{\text{Linear maps from}V \to W}$
+\\vector spaces over K
+
+\subsection{Kernel and image of linear maps}
+Let F $V \to W$ Linear\\
+\begin{definition}
+    [kernel] $\ker F=\brac{v\in V|f(v)=0}\subseteq V$
+\end{definition}
+\begin{lemma}{}
+    $\ker F$ is a subspace of V
+\end{lemma}
+\begin{proof}
+    Given u,v $\in \ker F$ , $\forall a,b,\in K$
+    $F(au+bv)=aF(u)+bF(w)=0\to au+bv\in\ker F$
+\end{proof}
+\begin{lemma}{}
+    $F:V \to W$ is injective if and only if $\ker F=0$
+    
+\end{lemma}
+
+\begin{proof}
+    $\to$ suppose $F$ is injective, then the only element that maps to $0 is 0$\\
+    \\$\leftarrow$ \\
+    $\forall u,v \in V$ suppose $F(u)=F(v)$
+    then by injectivity of $F(u-v)=0$\\
+    since $\ker F=0, u-v=0\to u=v$
+\end{proof}
+e.g.
+$A=(2,1,-1)\in K^3$\\
+$F_A:K^3\to K$\\
+$(x,y,z)\mapsto (2x+y-z)$
+\\$\ker F_A=\brac{(x,y,z)\in K^3|2x+y-z=0}$\\
+similiarly 
+$A=\ij{a}:\mn $ matrix
+\\$F_A:K^m\to K^n$\\
+X:col vector
+\\$X \mapsto AX$\\
+$\ker F_A=\brac{X\in K^n|A\cd X=0}\\$
+$=\brac{\text{solution of} \m{a_{11}x_1+\dots+a_{1m}x_n=0\\\dots\\a_{m1}x_1+\dots+a_{mn}x_n=0}}$
+call it $\star$
+$\ker F_A=0 \iff \star$ has trivial solution$\iff F_A $ is injective $\iff $ col vectors are \li\\
+\begin{theorem}
+    $F:V\to W$ linear s.t. $\ker F=0$\\
+    if $\vs \in V$ are \li then $F(v_1),f(v_2)\dots,f(v_n)$ are also \li
+\end{theorem}
+\begin{proof}
+    by contradiction suppose we have $a_1f(v_1)+\dots+a_nf(v_n)=0$\\by linearility we have $f(\lincom)=0$
+    then $\lincom =0$\\
+hence $a_1=\dots =a_n=0$
+\end{proof}
+
+\subsection{image}
+$F: V\to W$ linear\\
+$Im F=F(v)=\brac{f(v)|v\in V}$
+\\
+\begin{lemma}
+    Im F is a subspace of W
+\end{lemma}
+\begin{proof}
+    $\forall F(v),F(u)\in imF, \forall a,b \in K$\\$aF(u)+bF(v)=F(au+bv)\in imF$\\
+\end{proof}
+
+Given $\vs \in V$
+\\$F:K^n \to V$\\
+$(\as) \mapsto \lincom$
+\\imF$=\brac{\text{linear combinations of }\vs}$\\
+$=span \brac{\vs}$\\
+$F_A:k^n\to k^m$\\
+$X=\m{x_1\\x_1\\\dots\\x_n}\mapsto A\cd X$
+note that $A\cd X=\star\star$ or a lin comb of the col vectors\\
+\\im$F_A=span\brac{\text{column of vectors}}$
+\\Given $A=\m{2&1&-1}$\\
+$K^3\to k$\\
+$(x,y,z) \mapsto 2x+y-z$\\
+$\dim \ker F_A=2$\\Im $F_A=k$ $\dim $ Im $F_A=1$
+\begin{theorem}
+    $F: v \to w$ linear\\
+    $\dim \ker F$+$\dim $ Im F=$\dim V$
+\end{theorem}
+\begin{proof}
+    Choose a basis $\brac{\ws}$ of Im F also a basis $\vs$ of $\ker F$ Choose There exists $u_1,u_2\dots u_m \in V$\\s.t. $F(u_1)=w_1\dots f(um)=w_m$\\
+    we claim that $\brac{u_1,u_2,\dots u_m,v_1\dots v_n}$ is a basis of V\\
+    \begin{enumerate}
+        \item it generates V\\
+$\forall v \in V, f(v)\in $im F\\
+$F(v)=a_1w_1+\dots +a_mw_n$\\
+$=a_1f(u_1)+\dots+a_mF(u_m)$
+
+\\$=F(a_1u_1+\dots a_mu_m)$
+$\to v-\sum a_iu_i \in \ker F \to v-\sum a_iu_i=\sum b_jv_j$ 
+\item $\brac{\vs,u_1\dots,u_m}$ is \li\\
+suppose $\sum a_iv_i+\sum b_ju_j=0$\\
+
+    \end{enumerate}
+    we apply F hence $F(b_iu_j)=0$\\
+    $=\sum b_j F(u_j)$\\
+    $=\sum b_jw_j=0$\\
+    by \li of$ \brac{w_j},b_j=0 \forall j\to\sum a_iv_i=0, a_i=0 \forall i$
+    
+\end{proof}
+\section{9/15/23 - Fri}
+
+$A={a}_{ij}: \mn$ matrix
+$F_A:K^n \to k^m$\\
+$X \mapsto AX$\\
+$\ker F_A=\brac{\text{solns of AX=0}}$
+\\Im F=span$ \brac{\text{sol vectors }}$
+$\to n =\dim \brac{\text{sols of AX=0}}+\dim span\brac{\text{col of A}}$\\
+Let $n=m$ AX=0 has only trivial sol $\iff$ cols of A is a basis of $K^n$
+\begin{theorem}
+    $F: V\to W $: Linear Map \\ assume $\dim V =\dim W$ if $\ker F=0 or $ ImF=W then F is a bijection.
+    
+\end{theorem}
+\begin{proof}
+   
+    Let $\underbrace{\ker F =0}_{\text{F is injective}}$ by thm $\iff \dim Im F=\underbrace{\dim V=\dim W }_{\text{By assumptions}}$
+    \\ $\iff ImF=W$\\
+    i.e. F is injective $\iff $F is surjective
+    
+    
+\end{proof}
+
+
+
+\subsection{Composition of linear maps}
+\begin{theorem}
+    
+    Given 2 linear maps :F$U \to V$ G:$V \to W $ Their composition $G \circ F : U \to W$ is linear 
+\end{theorem}
+\begin{proof}
+    $\forall u_1, u_2 \in U, a_1a_2 \in K$
+    \\$G \circ F(a_1u_1+a_2u_2
+    )$
+    \\=$G(F(a_1u_1+a_2u_2))$
+    \\=$G(a_1F(u_1)+a_2F(u_2))$
+    \\=$a_1G(F(u_1))+a_2G(F(u_2))$
+    \\=$a_1(G\circ F)(u_1)+a_2(G\circ F)(u_2)$
+    \\hence $G\circ F$ is linear\\
+    
+\end{proof}
+\begin{theorem}
+    $F:V\to W $ linear and bijective then its inver se $G:W \to V $ is also linear 
+\end{theorem}
+\begin{proof}
+    $\forall w_1w_2 \in W a_1,a_2 \in K$\\$G(a_1w_1a_2w_2) $ want to proof $=a_1G(w_1)+a_2G(w_2)$
+    \\
+    we apply $F, F(G(a_1w_1+a_2w_2))\equiv a_1w_1+a_2w_2$\\
+    where as $a_1G(w_1)+a_2G(w_2) $ apply F$F(a_1G(w_1)+a_2G(w_2))=a_1F(G(w_1))+a_2F(G(w_2))=a_1w_1+a_2w_2$ \\since F is bijective we are done\\
+    
+\end{proof}
+
+e.g. $K^2 \xrightarrow{F} K^2$
+\\$(x,y) \mapsto (2x-y,x+y)$\\
+is that a bijection?\\
+$$\m{x\\y}\to\m{2x-y\\x+y}=\m{2&-1\\1&1}\m{x\\y}$$
+\begin{enumerate}
+    \item $\m{2\\1},\m{-1\\1}$ are \li $\to F$ is bijective\\
+    \item Only trivial solution = $\ker F=0$ hence F is bijective
+\end{enumerate}
+
+
+\begin{definition}
+[isomorphism]    A linear map F is a called isomorphism or inveritble if F is also a bijection\\
+ie F: invertible $\to F^{-1}$ is linear\\
+\end{definition}
+$A \in \mathcal{M}_{\mn}(k) \rightsquigarrow F_A\in \mathcal{L}(k^n,k^m)$\\
+$\mathcal{M}_{\mn}(k)\to \mathcal{L}(k^n,k^m)$\\
+linear
+\begin{theorem}
+$\mathcal{M}_{\mn}(k)\to L(k^n,k^m)$\\
+is injective i.e. $F_A=F_B\to A=B \forall A,B, \in \mathcal{M}_{\mn}(k)$\\
+\end{theorem}
+
+\begin{proof}
+    since F is linear it is suffcient to show that $F_A=0\to A=0$
+    \\$$F_A(X)=AX=\m{A_1\cd X\\A_2 \cd X\\\dots \\A_nX}=\m{0\\0\\\dots\\0} \forall X \in K^n$$
+    $x \in k^n$ for each $i=1\dots m$ $\to A_iX=0, \forall X \in k^n\to A_i=0$
+    
+\end{proof}
+\begin{lemma}
+    {}If $a_1x_1+\dots a_nx_n=0$\\
+    $\forall x_i \in K$\\
+    then $a_i=\dots=a_n=0$
+    
+    
+\end{lemma}
+\begin{theorem}
+    $F: \mathcal{M}_{\mn}(k) \to L(k^n,k^m)$\\
+    $A \mapsto F_A$ is surjective\\
+    ie for any linear map $\mathcal{Q}:k^n \to k^m$ Q=$F_A$ for some A.
+    
+\end{theorem}
+\section{9/18/23 - Mon}
+$F: V\to W, G:W \to U$ be linear maps\\
+Composition $G \circ F:V \to U$
+\begin{enumerate}
+    \item $G\circ F$ is linear\\
+    \item $G \circ (a_1F_1+a_2F_2)=a_1G\circ F_1+a_2 G \circ F_2$
+
+\end{enumerate}
+$(b_1G_1+b_2G_2)\circ F=b_1G_1\circ F +b_2G_2\circ F$
+\\
+$\mathcal{M}_{\mn}(k) \xrightarrow[]{\varphi} \mathcal{L}(k^n,k^m)$
+\\$A \mapsto F_A$
+\\e.g. $A=\m{2&1\\-1&5\\1&0} \rightsquigarrow F_A:k^2\to k^3$\\
+$F_A\m{1\\0}=\m{2\\-1\\1}$\\
+$F_A\m{0\\1}=\m{1\\5\\0}$
+\\In general\\
+Given $A=(a_{ij}): \mn $ matrix\\
+$F_A(e_i)=$ith column of A\\
+e.g. $e_i=\m{0\\\dots\\1\\0\\0}$
+\\
+\begin{theorem}
+    $\varphi: \mathcal{M}_{\mn}(k) \to \mathcal{L}(k^n,k^m)$ is injective i.e. $F_A=F_B \forall A ,B \in $$\mathcal{M}_{\mn}(k)$
+    \\
+\end{theorem}
+\begin{theorem}
+  $  \varphi$ is onto i.e. $\forall $ linear maps $F:k^n \to k^m$ there exists a $\mn$ matrix A such that $F=F_A$
+\end{theorem}
+\begin{lemma}
+    {} Given a linear map $F:k^n\to k$\\
+    $F=\underbrace{A\cd X}_{\text{dot product}}$where $A=F(e_1),F(e_2)\dots,F(e_n) \in k^n$\\
+    
+\end{lemma}
+
+e.g. $F: k^n\to k$\\
+$F(x_1\dots x_n)=\lincom$
+\\$F(e_1)=a_1,F(e_2)=a_2\dots $
+\begin{proof}
+    We can write $X=x_1e_1 +\dots + x_ne_n$\\$F(x)=x_1F(e_1)+\dots +x_nF(e_n)$\\
+    =$F(2_1),\dots, F(e_n)\cd (x_1\dots x_n)$
+    \\ 
+    
+\end{proof}
+\big proof of theorem
+\\
+\begin{proof}
+    Let $F:k^n \to k^m$ be a linear map\\
+    Let $P: k^m \to k$ be the ith projection\\
+    $p_i\cd \m{y_1\\\dots\\y_n}=y_i$\\
+    Then $p_i \circ F: k^n \to k$ is linear, by the lemma $p_i \circ F(X)=A_i\cd X_i$  for some $A_i \in k^n$\\
+    In fact $F(x)=\m{A_1\cd X \\A_2\cd X\\A_3 \cd X}=AX, A+\m{A_1\\A_2\\\dots \\ A_m}$
+\end{proof}
+
+$a_1,\dots,a_n \in k^n$
+\\$A=\m{A_1\\A_2\\A_m}: \mn$ matrix\\
+$A_1\m{a_z{11}&a_{12}&\dots&a_{1n}} \in k^n$\\
+$A_2\m{a_{21}&a_{22}&\dots&a_{2n} \in k^n}$\\
+\dots
+\\
+\begin{theorem}
+    [A+B] let$ \Phi:\mathcal{M}_{\mn}(k) \to \mathcal{L}(k^n.k^m)$\\
+     is an isomorphism of vector spaces over k\\
+     for any $F \in \mathcal{L}(k^n.k^m)$\\
+     there exists a unique $\mn$ matrix A\\
+     such that $F=F_A$ we call A to be associated matrix of F
+\end{theorem}
+e.g. $F:k^3\to k^2$
+\\$(x,y,z) \mapsto (x+y,z)$\\
+find the associated matrix of F\\
+$$A=\m{1&1&0\\0&0&1}: 2\times 3$$
+$F(\m{1\\0\\0})=\m{1\\0} F(\m{0\\1\\0}=\m{1\\0}) F(\m{0\\0\\1})=\m{0\\1}$\\
+In general $F:k^n \to k^m$\\
+$F=\m{x_1\\x_2\\\dots\\ x_n}=\m{a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n\\\dots\\a_{m1}x_1+a_{m2}x_2+\dots a_{mn}x_n}$
+e.g.  $L_\theta: \R^2 \to \R^2$
+
+a rotation by $\theta $ counter-clockly\\ 
+what is the matrix A?\\
+$$A=\m{\cos{\theta} &-\sin{\theta}\\\sin{\theta} &\cos{\theta}}$$\\
+e.g. $R(\frac{\pi}{2})=\m{0&-1\\1&0}$
+\begin{lemma}
+    {} Let $A \mn$ matrix and $B n\times l$ matrix \\
+    $F_A:k^n \to k^m$$F_B: k^l\to k^n$\\
+    then $F_A \circ F_B= F_{AB}$\\
+    
+    
+\end{lemma}
+
+\begin{proof}
+    for every $x \in k^n$$F_{AB}=(AB)X=A(BX)=(F_A \circ F_B)(x)$
+\end{proof}
+\section{9/19/23 - Wed}
+warning: Midterm 9/27  chap I-IV
+\\
+recall $\calm_{\mn}(k) \xrightarrow{\sim} L(k^n,k^m)$
+
+hence $A \mapsto^{\varphi} F_A$
+
+$F_{AB}=F_A\circ F_B$\\
+let n=m, $F_A$ is invertible iff A is invertible
+\\
+\begin{proof}
+    $\to $\\
+    $F_A:K^n \to K^n  $ invertible\\
+    there exists $G:k^n\to k^n$ such that $F_A \circ G=Id, G \circ F_A=Id$
+$G+F_B$ fora unique matrix B\\
+then $F_A \circ F_B=F_{AB}=Id=F_I$\\
+$F_B\circ F_A=F_{BA}=Id=F_I$
+
+
+
+
+\end{proof}
+\begin{theorem}
+    $A: n \times n $ matrix and let $A^i$ be the ith col of A, then A is invertible iff $A^1\dots A^n$ are \li
+\end{theorem}
+
+
+\begin{proof}
+    consider the associated linear map $$F_A:K^n \to K^n \\ X \mapsto AX$$
+    $$F_A(e_i)=A^i$$\\
+As explained previously A is invertible iff $F_A$ is invertible. 
+$F_A$ is invertible then $A^1\dots A^n$ are \li
+\\suppose we have $c_1A^1+\dots+c_nA^1=0$\\
+then we know that $c_1F_A(e_1)+\dots+c_nF_A(e_n)=0$
+$\iff F_A(c_1e_1+\dots+c_ne_n)=0\iff c_1e_1+\dots+_ne_n=0\iff c_1=\dots=c_n=0$\\
+$\leftarrow$
+suppose $A^1\dots A^n$ are \li then they for a basis of $k^n$. There exists a linear map $G:k^n \to k^n$ s.t. $$G(A^1)=e_1 \dots G(A^n)=e_n$$\\clearly $F_A \circ G=I$ $G \circ F_A=I$\\\end{proof}
+e.g.$\m{0&1&0\\0&0&1\\1&0&0}$ is invertible since $A^1,A^2,A^3$ are \li\\
+e.g.${F(x,y,z)=(x-2y,y-z,2z)}, F_A=\m{1&-2&0\\0&-1&-1\\0&0&2}$
+\\This matrix is invertible because $\dim \R^3 =\dim \R^3 \to $ demension is the same also $\ker F=\oh \to $ this is injective hence this is bijective and A is invertible\\
+
+
+
+\subsection{Bases, matrices and linear maps}
+\\V is a vector space over K and let $\mathcal{B}$ be a basis $\brac{\vs}$
+\\$k^n \xrightarrow{\varphi} V$ is an isomorphism iff $(\as) \mapsto \lincom$ that $\brac{\vs}$ is a basis\\
+\begin{proof}
+    $\varphi$ is injective $\iff$ $\vs$ are \li
+\\ $\varphi$ is surjective $\iff $ $\vs $ generates v.
+\end{proof}
+
+Given a linear map $F: V \to W$
+\\Let $\mathcal{B}$ be a basis of V, $\mathcal{B}'$ be a basis of W\\
+Let $\dim V=n$ $\dim W=m$
+\\$$V \xrightarrow{F} W$$\\$k^n \xrightarrow{F^\mathcal{B}_{\mathcal{B}'}} k^m$
+Let $M^\mathcal{B}_{\mathcal{B}'}$ be a matrix associated to $F^\mathcal{B}_{\mathcal{B}'}$\\
+\begin{definition}
+    $M^\mathcal{B}_{\mathcal{B}'}$ (F)is the matrix associated to F with respect to $\mathcal{B}, \mathcal{B}'$ 
+
+\end{definition}
+\begin{exercise}
+    $V \subseteq k^3, V\brac{(x,y,z)|x+y+z=0}$
+    $F:k^3 \to V$
+
+    \\$F(x,y,z)=(x-y,y-z,z-x)$
+    we have standard basis $e_1=(1,0,0), e_2(0,1,0), e_3(0,0,1)$\\
+    $v_1=(1,-1,0),v_2=(0,-1,1)$ clearly forms a basis of V.
+    $F(1,0,0)=(1,0,-1)=v_1-v_2$\\
+    $F(0,1,0)=(-1,1,0)=-v_1$\\
+    $F(0,0,1)=(0,-1,1)=v_2$\\
+    we claim that $M^\mathcal{B}_{\mathcal{B}'}(F)=\m{1&-1&0\\-1&0&1}$ 
+\end{exercise}
+
+
+
+$\phantom{k}$
+\end{document}
+
